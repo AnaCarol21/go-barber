@@ -10,7 +10,7 @@
 ---
 
 # GoBarber
-:rocket: Aplicação desenvolvida no Bootcamp GoStack 11
+:rocket: Aplicação desenvolvida no Bootcamp GoStack 11 da [Rocketseat](https://github.com/Rocketseat) com a mentoria do [Diego Fernandes](https://github.com/diego3g)
 
 ## Layout
 <img src="https://github.com/AnaCarol21/go-barber/blob/master/assets/gobarber-web.gif" />
