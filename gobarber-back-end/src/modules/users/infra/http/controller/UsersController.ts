@@ -18,6 +18,4 @@ export default class UsersController {
 
     return response.json(user);
   }
-
-  public async path(request: Request, response: Response): Promise<Response> {}
 }
