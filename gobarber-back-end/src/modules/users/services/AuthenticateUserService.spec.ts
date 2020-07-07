@@ -42,13 +42,15 @@ describe('AuthenticateUser', () => {
       fakeUsersRepository,
       fakeHashProvider,
     );
-    expect(
+
+    await expect(
       authenticateUser.execute({
         email: 'johndoe@example.com',
         password: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
   it('should not be able to authenticate with wrong password.', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
@@ -57,6 +59,7 @@ describe('AuthenticateUser', () => {
       fakeUsersRepository,
       fakeHashProvider,
     );
+
     const authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
@@ -68,7 +71,7 @@ describe('AuthenticateUser', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'johndoe@example.com',
         password: 'wrong-password',
