@@ -14,8 +14,10 @@ export default class EtherealMailProvider implements IMailProvider {
           user: account.user,
           pass: account.pass,
         },
+        tls: {
+          rejectUnauthorized: false,
+        },
       });
-
       this.client = transporter;
     });
   }
@@ -25,8 +27,7 @@ export default class EtherealMailProvider implements IMailProvider {
       from: 'Equipe GoBarber <equipe@gobarber.com.br>',
       to,
       subject: 'Recuperação de senha',
-      text: 'Hello to mylself',
-      html: body,
+      text: body,
     });
 
     console.log('message sent: %s', message.messageId);
