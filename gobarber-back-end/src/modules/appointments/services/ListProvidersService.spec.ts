@@ -1,22 +1,38 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 // import AppError from '@shared/errors/AppError';
-import CreateAppointmentService from './CreateAppointmentService';
+import ListProvidersService from './ListProvidersService';
 
 let fakeUsersRepository: FakeUsersRepository;
-let createAppointment: CreateAppointmentService;
-describe('CreateAppointment', () => {
+let listProviders: ListProvidersService;
+describe('ListProviders', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
-    createAppointment = new CreateAppointmentService(
-      fakeAppointmentsRepository,
-    );
+    listProviders = new ListProvidersService(fakeUsersRepository);
   });
-  it('should be able to create a new appoinment.', async () => {
-    const appointment = await createAppointment.execute({
-      date: new Date(),
-      provider_id: '9873156',
+
+  it('should be able to list the providers.', async () => {
+    const user1 = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
     });
-    expect(appointment).toHaveProperty('id');
-    expect(appointment.provider_id).toBe('9873156');
+
+    const user2 = await fakeUsersRepository.create({
+      name: 'John Trê',
+      email: 'johntre@example.com',
+      password: '123456',
+    });
+
+    const loggedUser = await fakeUsersRepository.create({
+      name: 'John Qua',
+      email: 'johnqua@example.com',
+      password: '123456',
+    });
+
+    const providers = await listProviders.execute({
+      user_id: loggedUser.id,
+    });
+
+    expect(providers).toEqual([user1, user2]);
   });
 });
