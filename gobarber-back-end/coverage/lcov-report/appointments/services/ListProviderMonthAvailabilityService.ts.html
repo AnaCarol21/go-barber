@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.28% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>57/58</span>
+                <span class='fraction'>60/60</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.4% </span>
+                <span class="strong">62.07% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>35/57</span>
+                <span class='fraction'>36/58</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.28% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>57/58</span>
+                <span class='fraction'>60/60</span>
             </div>
         
             
@@ -115,7 +115,9 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -162,7 +164,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">341x</span>
+<span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
@@ -173,9 +176,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { inject, injectable } from 'tsyringe';
-&nbsp;
-import { getDaysInMonth, getDate } from 'date-fns';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getDaysInMonth, getDate } from 'date-fns';
+import { inject, injectable } from 'tsyringe';
 &nbsp;
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 &nbsp;
@@ -191,7 +194,7 @@ type IResponse = Array&lt;{
 }&gt;;
 &nbsp;
 @injectable()
-export default class ListProviderMonthAvailabilityService {
+class ListProviderMonthAvailabilityService {
   constructor(
     @inject('AppointmentsRepository')
     private appointmentsRepository: IAppointmentsRepository,
@@ -209,19 +212,21 @@ export default class ListProviderMonthAvailabilityService {
         month,
       },
     );
+    console.log(appointments);
+&nbsp;
     const numberOfDaysInMonth = getDaysInMonth(new Date(year, month - 1));
+&nbsp;
     const eachDayArray = Array.from(
-      {
-        length: numberOfDaysInMonth,
-      },
+      { length: numberOfDaysInMonth },
       (_, index) =&gt; index + 1,
     );
     console.log(eachDayArray);
 &nbsp;
     const availability = eachDayArray.map(day =&gt; {
       const appointmentsInDay = appointments.filter(appointment =&gt; {
-<span class="cstat-no" title="statement not covered" >        return getDate(appointment.date) === day;</span>
+        return getDate(appointment.date) === day;
       });
+&nbsp;
       return {
         day,
         available: appointmentsInDay.length &lt; 10,
@@ -230,7 +235,8 @@ export default class ListProviderMonthAvailabilityService {
 &nbsp;
     return availability;
   }
-}<span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
+}
+export default ListProviderMonthAvailabilityService;<span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -238,7 +244,7 @@ export default class ListProviderMonthAvailabilityService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 10 2020 17:19:31 GMT-0300 (GMT-03:00)
+                at Mon Jul 13 2020 16:47:45 GMT-0300 (GMT-03:00)
             </div>
         </div>
         <script src="../../prettify.js"></script>
