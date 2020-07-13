@@ -16,6 +16,7 @@ describe('CreateAppointment', () => {
     const appointment = await createAppointment.execute({
       date: new Date(),
       provider_id: '9873156',
+      user_id: '9873156',
     });
     expect(appointment).toHaveProperty('id');
     expect(appointment.provider_id).toBe('9873156');
@@ -27,12 +28,14 @@ describe('CreateAppointment', () => {
     await createAppointment.execute({
       date: appointmentDate,
       provider_id: '9873156',
+      user_id: '9873156',
     });
 
     expect(
       createAppointment.execute({
         date: appointmentDate,
         provider_id: '9873156',
+        user_id: '9873156',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
