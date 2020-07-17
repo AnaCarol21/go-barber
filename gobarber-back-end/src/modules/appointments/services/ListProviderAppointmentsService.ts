@@ -39,8 +39,6 @@ export default class ListProviderAppointmentService {
       },
     );
 
-    // await this.cacheProvider.save('sushi', 'asd');
-
     return appointments;
   }
 }
