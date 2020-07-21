@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiPower, FiClock } from 'react-icons/fi';
 import {
   Container,
@@ -8,12 +8,15 @@ import {
   Content,
   Schedule,
   NextAppointment,
+  Section,
+  Appointment,
   Calendar,
 } from './styles';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const { signOut, user } = useAuth();
 
   return (
@@ -56,6 +59,76 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointment>
+
+          <Section>
+            <strong>Manhã</strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars1.githubusercontent.com/u/62665967?s=460&u=0286bf1a831f762c4268b9babe6d1955a0ce70b9&v=4"
+                  alt="Ana Lima"
+                />
+                <strong>Ana Lima</strong>
+                <span>
+                  <FiClock /> 8:00
+                </span>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars1.githubusercontent.com/u/62665967?s=460&u=0286bf1a831f762c4268b9babe6d1955a0ce70b9&v=4"
+                  alt="Ana Lima"
+                />
+                <strong>Ana Lima</strong>
+                <span>
+                  <FiClock /> 8:00
+                </span>
+              </div>
+            </Appointment>
+            <strong>Tarde</strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars1.githubusercontent.com/u/62665967?s=460&u=0286bf1a831f762c4268b9babe6d1955a0ce70b9&v=4"
+                  alt="Ana Lima"
+                />
+                <strong>Ana Lima</strong>
+                <span>
+                  <FiClock /> 8:00
+                </span>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars1.githubusercontent.com/u/62665967?s=460&u=0286bf1a831f762c4268b9babe6d1955a0ce70b9&v=4"
+                  alt="Ana Lima"
+                />
+                <strong>Ana Lima</strong>
+                <span>
+                  <FiClock /> 8:00
+                </span>
+              </div>
+            </Appointment>
+            <Appointment />
+          </Section>
 
           <Calendar />
         </Schedule>
