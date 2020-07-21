@@ -1,10 +1,10 @@
 import React, { useRef, useCallback } from 'react';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { FiLogIn, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import { FormHandles } from '@unform/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import logoImg from '../../assets/logo.svg';
 
 import { Container, AnimationContainer, Content, Background } from './styles';
@@ -12,9 +12,9 @@ import { Container, AnimationContainer, Content, Background } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErros';
+import api from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
@@ -24,9 +24,10 @@ interface ResetPasswordFormData {
 const ResetPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  // const { ResetPassword } = useAuth();
   const { addToast } = useToast();
+
   const history = useHistory();
+  const location = useLocation();
 
   const handleSubmit = useCallback(
     async (data: ResetPasswordFormData) => {
@@ -45,10 +46,24 @@ const ResetPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        // await ResetPassword({
-        //   email: data.email,
-        //   password: data.password,
-        // });
+        const { password, password_confirmation } = data;
+        const token = location.search.replace('?token', '');
+
+        if (!token) {
+          throw new Error();
+        }
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
+          token,
+        });
+
+        addToast({
+          type: 'success',
+          title: 'Senha alterada com sucesso!',
+          description: 'Sua senha foi alterada, agora você pode fazer logon.',
+        });
 
         history.push('/');
       } catch (err) {
@@ -67,7 +82,7 @@ const ResetPassword: React.FC = () => {
         });
       }
     },
-    [addToast, history]
+    [addToast, history, location.search]
   );
   return (
     <Container>
@@ -92,8 +107,6 @@ const ResetPassword: React.FC = () => {
             />
 
             <Button type="submit">Alterar senha</Button>
-
-            <Link to="/forgot-password">Esqueci minha senha</Link>
           </Form>
 
           <Link to="/">
